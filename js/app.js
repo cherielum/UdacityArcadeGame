@@ -52,20 +52,13 @@ class Hero {
 
 
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    //setting initial property values
-
     this.x = 0;
-    this.y = 0;
-    //   image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    this.y = 65; //center
     this.sprite = 'images/enemy-bug.png';
     this.step = 101;
-    this.boundary = this.step * 4;
+    this.boundary = this.step * 5;
+    this.resetPos = -this.step;
 };
-
-
 
 // Update the enemy's position, required METHOD for game
 // Parameter: dt, a time delta between ticks
@@ -80,8 +73,11 @@ Enemy.prototype.update = function(dt) {
         // Increment x by speed * dt
         this.x += 200 * dt;
     }
-    // else
+    else {
         // Reset pos to start
+        this.x = this.resetPos;
+    }
+
 };
 
 // Draw the enemy on the screen, required METHOD for game
