@@ -22,7 +22,18 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        id;
+
+        const modal = document.querySelector('.modal-bg');
+        const replay = document.querySelector('.modal-button');
+
+        replay.addEventListener('click', function() {
+            modal.classList.toggle('hide');
+            player.reset();
+            player.victory = false;
+            win.requestAnimationFrame(main);
+        });
 
     canvas.width = 505;
     canvas.height = 606;
@@ -35,14 +46,13 @@ var Engine = (function(global) {
 
 
     function main() {
-        /* Get our time delta information which is required if your game
-         * requires smooth animation. Because everyone's computer processes
+
+        /* Get our time delta information which is required if your gamerequires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
-         * would be the same for everyone (regardless of how fast their
-         * computer is) - hurray time!
          */
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
+
 
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
@@ -50,15 +60,26 @@ var Engine = (function(global) {
         update(dt);
         render();
 
+
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
         lastTime = now;
 
+
+
         /* Use the browser's requestAnimationFrame function to call this
+
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if (player.victory === true) {
+            // console.log('Game Over!');
+            win.cancelAnimationFrame(id);
+            modal.classList.toggle('hide');
+        }
+        else {
+            id = win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -96,7 +117,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        //player.update();
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -114,6 +135,7 @@ var Engine = (function(global) {
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
                 'images/stone-block.png',   // Row 3 of 3 of stone
+                'images/stone-block.png',
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
@@ -121,7 +143,7 @@ var Engine = (function(global) {
             numCols = 5,
             row, col;
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -175,7 +197,7 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-cat-girl.png',
     ]);
     Resources.onReady(init);
 
