@@ -2,11 +2,11 @@
 // var means written PRE-ES6
 
 
-var Enemy = function(x, y, speed) {
+var Enemy = function(x, y, speed, sprite) {
     this.x = x;
     this.y = y + 55; //center
     this.speed = speed;
-    this.sprite = 'images/Rock.png';
+    this.sprite = sprite;
     this.step = 101;
     this.boundary = this.step * 5;
     this.resetPos = -this.step;
@@ -68,7 +68,7 @@ class Hero {
 
                 //Did player x and y reach final tile?
                 if(this.y === 55) {
-                    console.log('Win!');
+                    //console.log('Win!');
                     this.victory = true;
                 }
                 // console.log(this.y);
@@ -121,10 +121,10 @@ class Hero {
 //update position
 const player = new Hero();
 //(location x, location y, speed)
-const bug1 = new Enemy(-101, 0, 200);
-const bug2 = new Enemy(-101, 83, 400);
-const bug3 = new Enemy((-101*2.5), 83, 300);
-const bug4 = new Enemy((-101*2.5), 166, 100);
+const bug1 = new Enemy(-101, 0, 200, 'images/enemy-bug.png');
+const bug2 = new Enemy(-101, 83, 400, 'images/enemy-bug.png');
+const bug3 = new Enemy((-101*2.5), 83, 300, 'images/Rock.png');
+const bug4 = new Enemy((-101*2.5), 166, 100, 'images/Rock.png');
 const allEnemies = [];
 allEnemies.push(bug1,bug2,bug3,bug4);
 // console.log(allEnemies);
