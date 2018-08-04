@@ -14,13 +14,9 @@ var Enemy = function(x, y, speed, sprite) {
 
 // Update the enemy's position, required METHOD for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-
+Enemy.prototype.update = function (dt) {
     // If enemy is not passed boundary
-    if(this.x < this.boundary) {
+    if (this.x < this.boundary) {
         // Move forward
         // Increment x by speed * dt
         this.x += this.speed * dt;
@@ -32,13 +28,9 @@ Enemy.prototype.update = function(dt) {
 };
 
 // Draw the enemy on the screen, required METHOD for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 
 class Hero {
     constructor() {
@@ -57,13 +49,11 @@ class Hero {
             for(let enemy of allEnemies) {
 
                 // did player x and y collide w/ enemy?
-                if(this.y === enemy.y &&
-                    (enemy.x + enemy.step >
-                        this.x && enemy.x <
-                        this.x + this.step)) {
-                    this.reset();
-                    // alert('Collide!');
-                }
+                if (this.y === enemy.y &&
+                    (enemy.x + enemy.step > this.x && enemy.x < this.x + this.step)) {
+                        this.reset();
+                        // alert('Collide!');
+                        }
             }
 
                 //Did player x and y reach final tile?
@@ -78,7 +68,6 @@ class Hero {
     render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
 
     /**
      * Update hero's x and y property
@@ -132,7 +121,7 @@ allEnemies.push(bug1,bug2,bug3,bug4);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -142,4 +131,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
