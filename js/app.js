@@ -6,7 +6,7 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y + 55; //center
     this.speed = speed;
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = 'images/Rock.png';
     this.step = 101;
     this.boundary = this.step * 5;
     this.resetPos = -this.step;
@@ -127,7 +127,7 @@ const bug3 = new Enemy((-101*2.5), 83, 300);
 const bug4 = new Enemy((-101*2.5), 166, 100);
 const allEnemies = [];
 allEnemies.push(bug1,bug2,bug3,bug4);
-console.log(allEnemies);
+// console.log(allEnemies);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
