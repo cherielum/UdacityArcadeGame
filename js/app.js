@@ -50,14 +50,15 @@ class Hero {
 
                 // did player x and y collide w/ enemy?
                 if (this.y === enemy.y &&
-                    (enemy.x + enemy.step > this.x && enemy.x < this.x + this.step)) {
-                        this.reset();
-                        // alert('Collide!');
-                        }
+                    (enemy.x + enemy.step > this.x) &&
+                    (enemy.x < this.x + this.step)) {
+                    this.reset();
+                    // alert('Collide!');
+                }
             }
 
                 //Did player x and y reach final tile?
-                if(this.y === 55) {
+                if (this.y === 55) {
                     //console.log('Win!');
                     this.victory = true;
                 }
